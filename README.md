@@ -14,7 +14,7 @@ The following tutorials were used:
 ## CRUD
 https://taniarascia.github.io/react-hooks/
 
-##Hooks + Context API
+## Hooks + Context API
 https://www.taniarascia.com/using-context-api-in-react/
 
 ## Apollo
