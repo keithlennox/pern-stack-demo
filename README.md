@@ -12,7 +12,7 @@ Apollo is used in the frontend to make GraphQL calls to the backend.
 The following tutorials were used:
 
 ## CRUD
-https://taniarascia.github.io/react-hooks/
+https://www.taniarascia.com/crud-app-in-react-with-hooks/
 
 ## Hooks + Context API
 https://www.taniarascia.com/using-context-api-in-react/
