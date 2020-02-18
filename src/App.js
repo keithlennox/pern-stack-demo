@@ -13,15 +13,15 @@ const App = () => {
     { id: 3, name: 'Ben', username: 'benisphere' },
   ]
 
-  //Create empty form values for the update user form
+  /*Create object that contains creates name/value pairs for the edit user form.*/
   const initialFormState = { id: null, name: '', username: '' }
 
-  //Create state
-  const [users, setUsers] = useState(usersData)//Create users state and populate with dummy data
-  const [currentUser, setCurrentUser] = useState(initialFormState)
-  const [editing, setEditing] = useState(false)//Create editing state. Indicates if form is in update or create mode.
+  /*Use the "useState" hook to create state objects. You can have as many state objects as you want. Here we create 3.*/
+  const [users, setUsers] = useState(usersData)//Create users state and set initial value to dummy data.
+  const [currentUser, setCurrentUser] = useState(initialFormState)//Create currentUser state and populate with initial form state.
+  const [editing, setEditing] = useState(false)//Create editing state and set to false. Indicates if form is in update or create mode.
 
-  //Return JSX
+  /*Return statement: all React components must contain a return statement. The return statement can only contain JSX.*/
   return (
     <UserProvider value={{ users, setUsers, editing, setEditing, currentUser, setCurrentUser }} >
     <div className="container">

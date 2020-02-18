@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import UserContext from '../UserContext'
 
-/*Functional component that takes props as paremeter.
-We'll map through the user data we sent through as a prop and display the properties for each user,
-or display a message if there are no users.
-*/
+/*We map through the user data we sent through as a prop and display the properties for each user,
+or display a message if there are no users.*/
 const UserTable = () => {
 
+//Use the React useContext hook to retrieve the state objects from the Context API so that they're avaiable in the js file.
 const { users, setUsers, editing, setEditing, currentUser, setCurrentUser } = useContext(UserContext)
 
 //
@@ -15,11 +14,19 @@ const editRow = user => {
   setCurrentUser({ id: user.id, name: user.name, username: user.username })
 }
 
-//Delete user function
+/*Delete user function
+Triggered by the delete button displayed in each table row.
+This finction accepts the id for the table row the user clicked on.
+The filter() method creates a new array that contains all users in
+the users state where the id matches the id of the row the user clicked on.*/
 const deleteUser = id => {
   setUsers(users.filter(user => user.id !== id))
 }
 
+  /*Return statement contains JSX, which contains a table.
+  We use the javascript map method to loop through the users state and display a table row for each user
+  or display a message if there are no users.
+  The delete button calls the deleteUser function and passes it the row id for the row clicked on.*/
   return(
     <table>
       <thead>
