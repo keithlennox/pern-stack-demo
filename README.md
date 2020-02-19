@@ -16,6 +16,7 @@ https://www.taniarascia.com/crud-app-in-react-with-hooks/
 
 ## Hooks + Context API
 https://www.taniarascia.com/using-context-api-in-react/
+https://medium.com/better-programming/https-medium-com-mayank-gupta-6-88-react-useeffect-hooks-in-action-2da971cfe83f
 
 ## Apollo
 https://www.apollographql.com/docs/react/get-started/  

@@ -8,7 +8,10 @@ const UserTable = () => {
 //Use the React useContext hook to retrieve the state objects from the Context API so that they're avaiable in the js file.
 const { users, setUsers, editing, setEditing, currentUser, setCurrentUser } = useContext(UserContext)
 
-//
+/*Edit row function
+Triggered when edit button in table row is clicked.
+Supplied with current row user.
+Turns on edit mode and sets the current user to the current row user.*/
 const editRow = user => {
   setEditing(true)
   setCurrentUser({ id: user.id, name: user.name, username: user.username })
@@ -20,13 +23,15 @@ This finction accepts the id for the table row the user clicked on.
 The filter() method creates a new array that contains all users in
 the users state where the id matches the id of the row the user clicked on.*/
 const deleteUser = id => {
+  setEditing(false)
   setUsers(users.filter(user => user.id !== id))
 }
 
   /*Return statement contains JSX, which contains a table.
   We use the javascript map method to loop through the users state and display a table row for each user
   or display a message if there are no users.
-  The delete button calls the deleteUser function and passes it the row id for the row clicked on.*/
+  The delete button calls the deleteUser function and passes it the row id for the row clicked on.
+  The edit button calls the editRow function and passes it the current row user.*/
   return(
     <table>
       <thead>
