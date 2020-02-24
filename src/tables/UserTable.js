@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import UserContext from '../UserContext'
-import { gql } from 'apollo-boost'
+import { gql } from 'apollo-boost' //Allows us to parse GraphQL queries.
 import { useQuery } from '@apollo/react-hooks'
 
 //Create graphQL query string
@@ -22,7 +22,13 @@ const UserTable = () => {
   //Use the React useContext hook to retrieve the state objects from the Context API so that they're avaiable in this js file.
   const { user, setUser, users, setUsers, editing, setEditing } = useContext(UserContext)
 
-  //Call postgreSQL database to get all users using useQuery hook provided by Apollo.
+  /*Call postgreSQL database to get all users using useQuery hook provided by Apollo.
+  The useQuery hook accepts the query as a first argument and returns an object with
+  three properties data, loading and error.
+  We use object destructuring to get these three properties.
+  data : It contains the data which comes back from our graphql api.
+  loading : The loading property is true when the query is still in process.
+  error: The error property contains error-related data.*/
   const { loading, error, data } = useQuery(GET_USER_QUERY);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;

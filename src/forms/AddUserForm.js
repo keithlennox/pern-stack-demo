@@ -40,6 +40,9 @@ const AddUserForm = () => {
   const { user, setUser, users, setUsers, editing, setEditing } = useContext(UserContext)
 
   /*Call postgreSQL database to create new user using useMutation hook provided by Apollo.
+  The useMutation hook takes the mutation as a first argument returns a tuple that includes:
+  A mutate function that you can call at any time to execute the mutation and an object containing
+  loading, data, and error properties.
   If you leave out {refetchQueries: [{ query: GET_USER_QUERY }]}, the database update still
   works, but you have to refresh the browser for the change to show up on the web page.
   The useMutation hook returns a function that you need to call in order to actually make 
