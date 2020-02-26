@@ -1,20 +1,8 @@
 import React, { useContext } from 'react'
 import UserContext from '../UserContext'
-import { gql } from 'apollo-boost' //Allows us to parse GraphQL queries.
-import { useQuery } from '@apollo/react-hooks'
-
-//Create graphQL query string
-const GET_USER_QUERY = gql`
-  {
-    allUsers {
-      nodes {
-        id
-        name
-        username
-      }
-    }
-  }
-`
+import { useQuery, useMutation } from '@apollo/react-hooks'
+import { GET_USERS_QUERY } from '../GraphQL'
+import { DELETE_USER_MUTATION } from '../GraphQL'
 
 //React UserTable functional component
 const UserTable = () => {
@@ -29,12 +17,32 @@ const UserTable = () => {
   data : It contains the data which comes back from our graphql api.
   loading : The loading property is true when the query is still in process.
   error: The error property contains error-related data.*/
-  const { loading, error, data } = useQuery(GET_USER_QUERY);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  console.log(data)
-  setUsers(data.allUsers.nodes) //Updates the user state with with database data.
+  const { loading: getUserLoading, error: getUserError, data } = useQuery(GET_USERS_QUERY);
 
+  //Call postgreSQL database to delete user using useMutation hook provided by Apollo.
+  const [deleteExistingUser, { loading: deleteUserLoading, error: deleteUserError }] = useMutation(
+  DELETE_USER_MUTATION, 
+  {refetchQueries: [{ query: GET_USERS_QUERY }]}
+  );
+
+  //Handle results of API call to get all users
+  if (getUserLoading) { //Display loading message until results are back.
+    return (
+      <p>Loading...</p> 
+    )
+  }
+  if (getUserError) { //Display error message if there was an error.
+    return (<p>Error: cannot get users</p>)
+  }
+  setUsers(data.allUsers.nodes) //If results are back error free, update the user state with with database data.
+
+  /*Handle results of API call to get all users
+  Notice the short form way of handling the if statements.
+  I think we should find a way to display these mesaages 
+  without disabling the entire list of users*/
+  if (deleteUserLoading) return <p>Processing...</p>;
+  if (deleteUserError) return <p>Error: user could not be deleted</p>;
+  
   /*Get table row function
   Triggered when the edit button in a table row is clicked,
   which sends the table row data as a paramter to this function.
@@ -48,13 +56,15 @@ const UserTable = () => {
 
   /*Delete user function
   Triggered when the delete button in a table row is clicked.
-  This finction accepts the id for the table row the user clicked on.
+  This function accepts the id for the table row the user clicked on.
   The filter() method creates a new array that contains all users in
   the users state where the id matches the id of the row the user clicked on.*/
   const deleteUser = id => {
+    console.log(id)
     setEditing(false)
-    setUsers(users.filter(user => user.id !== id))
-    setUser({ id: null, name: '', username: '' })
+    deleteExistingUser( {variables: { id: id } } ) //Delete user from database
+    setUsers(users.filter(user => user.id !== id)) //Delete user from Users state
+    setUser({ id: null, name: '', username: '' }) //Re-set user state to empty
   }
 
   /*Return statement (JSX) contains a table.

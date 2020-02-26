@@ -1,37 +1,8 @@
 import React, { useState, useContext } from 'react'
 import UserContext from '../UserContext'
-import { gql } from 'apollo-boost'
 import { useMutation } from '@apollo/react-hooks'
-
-//Create graphQL query string
-const GET_USER_QUERY = gql`
-  {
-    allUsers {
-      nodes {
-        id
-        name
-        username
-      }
-    }
-  }
-`
-
-//Create graphQL mutation string
-const ADD_USER_MUTATION = gql`
-  mutation myMutation($name: String!, $username: String!) {
-      createUser(
-        input: {
-          user: {
-            name: $name,
-            username: $username
-          }
-        }
-      )
-    {
-      clientMutationId
-      }
-    }
-  `
+import { GET_USERS_QUERY } from '../GraphQL'
+import { ADD_USER_MUTATION } from '../GraphQL'
 
 //React AddUserForm functional component
 const AddUserForm = () => {
@@ -48,7 +19,10 @@ const AddUserForm = () => {
   The useMutation hook returns a function that you need to call in order to actually make 
   the update to the database. We call this when the "Add new user" button is clicked.
   The useMutation function also returns loading and error values.*/
-  const [addNewUser, { loading, error }] = useMutation(ADD_USER_MUTATION, {refetchQueries: [{ query: GET_USER_QUERY }]});
+  const [addNewUser, { loading, error }] = useMutation(
+    ADD_USER_MUTATION, 
+    {refetchQueries: [{ query: GET_USERS_QUERY }]}
+  );
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 

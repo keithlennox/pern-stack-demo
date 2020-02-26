@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import UserTable from './tables/UserTable'
-import AddUserForm from './forms/AddUserForm'
-import EditUserForm from './forms/EditUserForm'
+import UserTable from './Components/UserTable'
+import AddUserForm from './Components/AddUserForm'
+import EditUserForm from './Components/EditUserForm'
 import { UserProvider } from './UserContext'
 
 //Create dummy data (to be replaced with db)
