@@ -36,7 +36,7 @@ const AddUserForm = () => {
   /*Add user function
   Called when the form is submitted.*/
   const addUser = user => { //Takes the user state as a parameter.
-    user.id = users.length + 1 //Increment the user id, eventually this would be handled automatically by the posgreSQL db.
+    //user.id = users.length + 1 //Increment the user id, eventually this would be handled automatically by the posgreSQL db.
     addNewUser( {variables: { name: user.name, username: user.username } } ) //This adds new user to database
     setUsers([...users, user]) //The spread operator is used to add the user state to the users state.
     setUser({ id: null, name: '', username: '' }) //The user state is re-set back to empty values.

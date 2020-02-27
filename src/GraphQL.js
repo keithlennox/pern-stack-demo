@@ -4,7 +4,8 @@ import { gql } from 'apollo-boost' //Allows us to parse GraphQL queries.
 
 //Create graphQL query string
 export const GET_USERS_QUERY = gql`
-  {
+  query GetUsers {
+    __typename
     allUsers {
       nodes {
         id
@@ -31,6 +32,16 @@ export const ADD_USER_MUTATION = gql`
       }
     }
   `
+
+//Create graphQL mutation string that deletes user
+export const UPDATE_USER_MUTATION = gql`
+  mutation UpdateUser($id: Int!, $name: String!, $username: String!) {
+    __typename
+    updateUserById(input: {userPatch: {name: $name, username: $username}, id: $id}) {
+      clientMutationId
+    }
+  }
+`
 
 //Create graphQL mutation string that deletes user
 export const DELETE_USER_MUTATION = gql`

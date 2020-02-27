@@ -1,10 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react'
 import UserContext from '../UserContext'
+import { useMutation } from '@apollo/react-hooks'
+import { GET_USERS_QUERY } from '../GraphQL'
+import { UPDATE_USER_MUTATION } from '../GraphQL'
 
 const EditUserForm = () => {
 
   //Use the React useContext hook to retrieve the state objects from the Context API so that they're avaiable in the js file.
   const { user, setUser, users, setUsers, editing, setEditing } = useContext(UserContext)
+
+  //Call postgreSQL database to update user using useMutation hook provided by Apollo.
+  const [updateExistingUser, { loading, error }] = useMutation(
+    UPDATE_USER_MUTATION, 
+    {refetchQueries: [{ query: GET_USERS_QUERY }]}
+  );
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
 
   /*Handle change function
   Called whenever the form field values change.*/
@@ -17,6 +28,7 @@ const EditUserForm = () => {
   Triggered when the update user button is clicked.
   Uses the map function to loop thru users state and replace the users state user with the user state user.*/
   const editUser = (user) => { //This function gets the user state as a parameter.
+    updateExistingUser( {variables: { id: user.id, name: user.name, username: user.username } } ) //This adds new user to database
     setUsers(users.map(mappedUser => (mappedUser.id === user.id ? user : mappedUser)))
     setEditing(false) //Set the editing state to false, which causes this form to be replaced with the add user form.
     setUser({ id: null, name: '', username: '' }) // Re-set user state back to empty.
