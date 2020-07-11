@@ -11,7 +11,7 @@ Apollo is used in the frontend to make GraphQL calls to the backend.
 
 Use the following commands to create the database required for this demo:
 
-CREATE DATABASE users;
+CREATE DATABASE users;  
 CREATE TABLE users ( id SERIAL PRIMARY KEY, name VARCHAR(20), username VARCHAR(20) );
 
 The following tutorials were used:
