@@ -21,7 +21,7 @@ Use the following commands to create the database required for this demo:
 CREATE DATABASE users;  
 CREATE TABLE users ( id SERIAL PRIMARY KEY, name VARCHAR(20), username VARCHAR(20) );
 
-The following tutorials were used:
+### The following tutorials were used:
 
 ## CRUD
 https://www.taniarascia.com/crud-app-in-react-with-hooks/
