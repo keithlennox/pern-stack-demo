@@ -5,7 +5,7 @@ A simple CRUD app that can add, update, or delete users.
 ## Frontend
 React  
 State management is handled by React hooks (useState, useEffect, useContext) + context API.   
-Navigation: conditional rendering
+Navigation: conditional rendering  
 Connect to backend: Apollo
 
 ## Backend
