@@ -10,7 +10,7 @@ Connect to backend: Apollo
 
 ## Backend
 Backend: node.js  
-Web server: express / graphQL
+Web server: express / graphQL  
 Connect backend to db: postgraphile
 
 ## Database
