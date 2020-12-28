@@ -1,20 +1,19 @@
-# CRUD Demo
+# PERN Stack Demo
 
-A simple CRUD app that can add, update, or delete users.
+A simple PERN stack (postgres, express, react, node) application that uses postgraphile in the backend to automatically generate a GraphQL API. CRUD operations permit adding, updating or deleting users in a PostgreSQL database.  
 
 ## Frontend
 React  
-State management is handled by React hooks (useState, useEffect, useContext) + context API.   
-Navigation: conditional rendering  
-Connect to backend: Apollo
+State management: React hooks (useState, useEffect, useContext) + context API.    
+GraphQL requests: Apollo Client  
 
 ## Backend
-Backend: node.js  
+node.js  
 Web server: express / postgraphile  
-Connect backend to db: postgraphile
 
 ## Database
 PostgreSQL  
+ 
 
 Use the following commands to create the database required for this demo:
 
@@ -35,5 +34,3 @@ https://reactgo.com/react-hooks-apollo/
 
 ## Postgraphile
 https://www.graphile.org/postgraphile/quick-start-guide/
-
-## Postgres
