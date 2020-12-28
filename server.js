@@ -8,7 +8,7 @@ app.use(cors())
 
 app.use(
   postgraphile(
-    "postgres://postgres:420Crosby@localhost:5432/users",
+    "postgres://xxxxxxxx:xxxxxxxxx@localhost:5432/users",
     "public",
     {
       watchPg: true,
